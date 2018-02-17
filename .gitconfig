@@ -8,13 +8,14 @@
 	status = auto
   showbranch = auto
 [color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
+  current = "#00af00 normal bold italic"
+  local = "#d7500f normal italic" 
+  remote = "#d70000 normal italic" 
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red bold
+  context = "#C9C9C9 normal dim" 
+  meta = "#b900ff normal dim bold"
+	frag = "#ff5900 normal italic bold"
+	old = "#ff1b00 normal bold"
   new = green bold
 [color "status"]
 	header = "#C9C9C9 normal dim"
@@ -27,6 +28,6 @@
 [log]
 	date = short
 [format]
-	pretty = %Cred%h%Creset %C(blue)%an%Creset %C(magenta)%cd%Creset %C(yellow)%d%Creset %s 
+	pretty = %Cred%h%Creset %C(blue)%an%Creset %C(magenta)%cd%Creset %C("#ff5900 normal italic bold")%d%Creset %C("#C9C9C9 normal dim")%s 
 [alias]
 	s = status --porcelain

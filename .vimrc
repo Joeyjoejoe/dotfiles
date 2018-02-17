@@ -52,6 +52,9 @@
 	syntax on
 	filetype plugin indent on
 
+	".swp files directory
+	set directory=$HOME/.vim/.swapfiles//
+
 	"Enable mouse
 	set mouse=a
 
