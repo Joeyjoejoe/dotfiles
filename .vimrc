@@ -4,11 +4,11 @@
 		Plug 'roman/golden-ratio'
 
 		" Status bar
-  	Plug 'bling/vim-airline'
-  	Plug 'vim-airline/vim-airline-themes'
+		Plug 'bling/vim-airline'
+		Plug 'vim-airline/vim-airline-themes'
 
 		" Git
-  	Plug 'tpope/vim-fugitive'
+		Plug 'tpope/vim-fugitive'
 
 		" Clojure
 		Plug 'clojure-emacs/cider-nrepl'
