@@ -1,6 +1,6 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+########################################
+########### UBUNTU  DEFAULTS ###########
+########################################
 
 if command -v tmux>/dev/null; then
   [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
@@ -39,111 +39,112 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
+########################################
+######### PROMPT CUSTOMIZATION #########
+########################################
 
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+	#################################
+	# Determine colors capabilities #
+	#################################
 
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
+	# set a fancy prompt (non-color, unless we know we "want" color)
+	case "$TERM" in
+			xterm-color|*-256color) color_prompt=yes;;
+	esac
 
+	if [ -n "$force_color_prompt" ]; then
+			if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+		# We have color support; assume it's compliant with Ecma-48
+		# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+		# a case would tend to support setf rather than setaf.)
+		color_prompt=yes
+			else
+		color_prompt=
+			fi
+	fi
 
-# PROMPT CONFIG
+	##################
+	# MISC FUNCTIONS #
+	##################
 
-RED="$(tput setaf 1)"
-GREEN="$(tput setaf 2)"
-YELLOW="$(tput setaf 3)"
-BLUE="$(tput setaf 4)"
-PURPLE="$(tput setaf 5)"
-CYAN="$(tput setaf 6)"
-WHITE="$(tput setaf 7)"
-RESET="$(tput sgr0)"
-BOLD="$(tput bold)"
+	# Define a new color from the xterm-256-color
+	# chart (https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg)
+	color(){
+		echo -e "\\033[38;5;$1m"
+	}
 
-
-color(){
-	echo -e "\\033[38;5;$1m"
-}
-
-light_blue="$(color 45)"
-dark_gray="$(color 69)"
-lambda="$(color 125)"
-#parens="$(color 166)"
-parens="$(color 125)"
-text="$(color 244)"
-
-set_path_prefix() {
-	if [ `pwd|grep home` ]; then
-		if [ `pwd | awk -F/ '{print $(4)}'` ]; then
-			echo "~/"
-		fi
-	else
-		if [ `pwd | awk -F/ '{print $(2)}'` ]; then
-			echo "/"
-		else
+	# Add a dot at the end of line, except
+	# For $HOME and / directories.
+	set_prompt_end() {
+	if [ $HOME = $PWD -o $PWD = / ]; then
 			echo ""
-		fi
-	fi
-}
-
-set_prompt_end() {
-#		if [ `pwd | awk -F/ '{print $(2)}'` ]; then
-#			echo "⸱"
-#		else
-#			echo ""
-#		fi
-
+		else
 			echo "⸱"
-}
+		fi
+	}
 
-########### GIT FUNCTIONS #############
+	#################
+	# GIT FUNCTIONS #
+	#################
 
-parse_git_branch() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
-}
+	# Get current branch name
+	parse_git_branch() {
+		git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+	}
 
-check_git_local_changes() {
-	if [[ `git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/'` ]]; then
-	if [[ `git status --porcelain` ]]; then
-		echo -e "\001\\033[38;5;166m\002𝈦 $1* "
+	# Display current branch, and colorize it
+	# if uncomitted changes are present.
+	check_git_local_changes() {
+		if [[ `git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/'` ]]; then
+			if [[ `git status --porcelain` ]]; then
+				echo -e "\001\\033[38;5;166m\002𝈦 $1* "
+			else
+				echo -e "\001\\033[38;5;129m\002𝈦 $1 "
+			fi
+		fi
+	}
+
+	###################
+	# COLORS & STYLES #
+	###################
+
+	# Colors
+	light_blue="$(color 69)"
+	bordeaux="$(color 125)"
+	dark_gray="$(color 244)"
+
+	# Styles for strings
+	bold="$(tput bold)"
+
+	# Reset all styles
+	reset="$(tput sgr0)"
+
+	#################
+	# PROMPT STRING #
+	#################
+
+	if [ "$color_prompt" = yes ]; then
+		PS1='${debian_chroot:+($debian_chroot)}\[$bold$bordeaux\](λ)\[$light_blue\] \W $(check_git_local_changes $(parse_git_branch))$(set_prompt_end)\[$reset$dark_gray\]'
+		
+		# Clear prompt styles before executing a command (command color hack)
+		trap 'printf \\e[0m' DEBUG
 	else
-		echo -e "\001\\033[38;5;129m\001𝈦 $1 "
-	fi
-	fi
-}
-
-	#\[$BLUE\]$(git_open)\[$GREEN\]$(git_n)\[$YELLOW\]$(git_m)\[$RED\]$(git_d)\[$BLUE\]$(git_close)
-if [ "$color_prompt" = yes ]; then
-	PS1='${debian_chroot:+($debian_chroot)}\[${BOLD}${parens}\](\[${lambda}\]λ\[${parens}\])\[${dark_gray}\] \W $(check_git_local_changes $(parse_git_branch))$(set_prompt_end)\[$RESET${text}\]'
-	trap 'printf \\e[0m' DEBUG
-else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
+	fi
+	unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
+	# If this is an xterm set the title to user@host:dir
+	case "$TERM" in
+	xterm*|rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
-*)
+	*)
     ;;
-esac
+	esac
 
-
+########################################
+########### MAN PAGES COLORS ###########
+########################################
 
 man() {
 	env \
@@ -163,18 +164,28 @@ man() {
 	man "$@"
 }
 
+########################################
+############## LS  CONFIG ##############
+########################################
 
+# Default paramters
+alias ls='ls -l --color=always --group-directories-first --human-readable'
 
+# Aliases
+alias la='ls -A'
 
+# Colors
+LS_COLORS='di=1;34:fi=0:ln=32;5:pi=5:so=5:bd=5:cd=5:or=31:ex=35:*.rpm=90:mi=34:st=37:ow=2'
 
+########################################
+################# MISC #################
+########################################
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
-
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -182,11 +193,6 @@ fi
 
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
