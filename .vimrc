@@ -12,7 +12,7 @@
 
     " Clojure
     Plug 'clojure-emacs/cider-nrepl'
-    Plug 'tpope/vim-fireplace'
+    " Plug 'tpope/vim-fireplace'
     Plug 'guns/vim-clojure-static'
     Plug 'guns/vim-clojure-highlight'
     Plug 'kien/rainbow_parentheses.vim'
@@ -48,6 +48,18 @@
   au Syntax * RainbowParenthesesLoadSquare
   au Syntax * RainbowParenthesesLoadBraces
 
+"-----UTILITY FUNCTIONS-----"
+
+	"Remove trailing spaces on save
+	function! <SID>StripTrailingWhitespaces()
+			let l = line(".")
+			let c = col(".")
+			%s/\s\+$//e
+			call cursor(l, c)
+	endfunction
+
+  autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
 "-----VIM DEFAULTS-----"
   set nocompatible
   syntax on
@@ -79,9 +91,10 @@
   set hlsearch
 
   "Indentation options
-  set shiftwidth=2
-  set tabstop=2
   set expandtab
+  set tabstop=2
+  set shiftwidth=2
+  set softtabstop=2
 
   "Set autoindents
   set cindent
