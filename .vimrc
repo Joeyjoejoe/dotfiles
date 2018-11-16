@@ -12,7 +12,7 @@
 
     " Clojure
     Plug 'clojure-emacs/cider-nrepl'
-    " Plug 'tpope/vim-fireplace'
+    Plug 'tpope/vim-fireplace'
     Plug 'guns/vim-clojure-static'
     Plug 'guns/vim-clojure-highlight'
     Plug 'kien/rainbow_parentheses.vim'
@@ -43,6 +43,8 @@
   autocmd Syntax clojure EnableSyntaxExtension
 
   "Rainbow parenthesis
+  let g:rbpt_max = 16
+  let g:rbpt_loadcmd_toggle = 0
   au VimEnter * RainbowParenthesesToggle
   au Syntax * RainbowParenthesesLoadRound
   au Syntax * RainbowParenthesesLoadSquare

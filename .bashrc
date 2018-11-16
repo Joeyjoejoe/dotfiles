@@ -125,7 +125,7 @@ fi
 
 	if [ "$color_prompt" = yes ]; then
 		PS1='${debian_chroot:+($debian_chroot)}\[$bold$bordeaux\](λ)\[$light_blue\] \W $(check_git_local_changes $(parse_git_branch))$(set_prompt_end)\[$reset$dark_gray\]'
-		
+
 		# Clear prompt styles before executing a command (command color hack)
 		trap 'printf \\e[0m' DEBUG
 	else
@@ -173,6 +173,7 @@ alias ls='ls -l --color=always --group-directories-first --human-readable'
 
 # Aliases
 alias la='ls -A'
+alias clopengl='tmuxinator start clopengl'
 
 # Colors
 LS_COLORS='di=1;34:fi=0:ln=32;5:pi=5:so=5:bd=5:cd=5:or=31:ex=35:*.rpm=90:mi=34:st=37:ow=2'
@@ -216,6 +217,10 @@ if ! shopt -oq posix; then
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
   fi
+fi
+
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
 fi
 
 export VISUAL=vim
