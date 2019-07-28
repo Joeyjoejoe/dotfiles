@@ -173,6 +173,7 @@ alias ls='ls -l --color=always --group-directories-first --human-readable'
 
 # Aliases
 alias la='ls -A'
+alias clopengl='tmuxinator start clopengl'
 
 # Colors
 LS_COLORS='di=1;34:fi=0:ln=32;5:pi=5:so=5:bd=5:cd=5:or=31:ex=35:*.rpm=90:mi=34:st=37:ow=2'
