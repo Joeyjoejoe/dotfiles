@@ -173,7 +173,6 @@ alias ls='ls -l --color=always --group-directories-first --human-readable'
 
 # Aliases
 alias la='ls -A'
-alias clopengl='tmuxinator start clopengl'
 
 # Colors
 LS_COLORS='di=1;34:fi=0:ln=32;5:pi=5:so=5:bd=5:cd=5:or=31:ex=35:*.rpm=90:mi=34:st=37:ow=2'
@@ -225,11 +224,17 @@ fi
 
 alias install_drivers='bash /home/victor/dotfiles/scripts/install_nvidia_drivers.sh'
 alias weather='bash /home/victor/dotfiles/scripts/weather.sh'
+alias clopengl='tmuxinator start clopengl'
+
+# todo bash
 alias t='$HOME/dotfiles/scripts/todo.sh -d ~/dotfiles/.todo/todo.cfg'
 alias tproj='t listproj'
 alias tcont='t lsc'
 alias trm='t del'
 alias tadd='t a'
+
+# git
+alias commits='git log --author="$(git config user.name)" --oneline'
 
 export VISUAL=vim
 export EDITOR="$VISUAL"
