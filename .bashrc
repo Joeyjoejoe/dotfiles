@@ -223,5 +223,13 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+alias install_drivers='bash /home/victor/dotfiles/scripts/install_nvidia_drivers.sh'
+alias weather='bash /home/victor/dotfiles/scripts/weather.sh'
+alias t='$HOME/dotfiles/scripts/todo.sh -d ~/dotfiles/.todo/todo.cfg'
+alias tproj='t listproj'
+alias tcont='t lsc'
+alias trm='t del'
+alias tadd='t a'
+
 export VISUAL=vim
 export EDITOR="$VISUAL"
