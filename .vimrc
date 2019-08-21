@@ -17,9 +17,28 @@
     Plug 'guns/vim-clojure-highlight'
     Plug 'kien/rainbow_parentheses.vim'
 
+    " Javascript
+    Plug 'pangloss/vim-javascript'
+
+    " Scss
+    Plug 'tpope/vim-haml'
+
     " Colorschemes
     Plug 'tomasr/molokai'
+
+    " Linter
+    Plug 'w0rp/ale'
   call plug#end()
+
+"----- ALE LINTER -----"
+  let b:ale_linters = {'scss': ['stylelint'], 'javascript': ['eslint']}
+  let b:ale_fixers = {'scss': ['stylelint'], 'javascript': ['eslint'],}
+
+  let g:ale_sign_error = '✘'
+  let g:ale_sign_warning = '⚠'
+  let g:ale_fix_on_save = 1
+  highlight ALEErrorSign ctermbg=NONE ctermfg=red
+  highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
 "----- STATUS BAR-----"
   let g:airline_powerline_fonts = 1
