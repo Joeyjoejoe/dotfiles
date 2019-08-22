@@ -22,4 +22,14 @@ alias install_drivers='bash /home/victor/dotfiles/scripts/install_nvidia_drivers
 alias weather='bash /home/victor/dotfiles/scripts/weather.sh'
 alias clopengl='tmuxinator start clopengl'
 
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
 
