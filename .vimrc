@@ -26,8 +26,8 @@
     " Colorschemes
     Plug 'tomasr/molokai'
 
-    " Linter
-    Plug 'w0rp/ale'
+    " Linters
+    Plug 'dense-analysis/ale'
   call plug#end()
 
 "----- ALE LINTER -----"
@@ -54,6 +54,12 @@
 
   let g:airline_section_z = airline#section#create(['%3p%%: ', 'linenr', ':%3v'])
   let g:airline_section_warning = ''
+
+  "-----LINTER-----
+  let g:ale_linters = {'javascript': ['eslint'], 'clojure': ['joker'], 'css': ['stylelint']}
+  let g:ale_fixers = {'javascript': ['eslint'], 'clojure': ['joker'], 'css': ['stylelint']}
+  let g:ale_sign_column_always = 1
+  let g:airline#extensions#ale#enabled = 1
 
 "-----CLOJURE SPECIFICS-----"
 
