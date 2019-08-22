@@ -17,9 +17,29 @@
     Plug 'guns/vim-clojure-highlight'
     Plug 'kien/rainbow_parentheses.vim'
 
+    " Javascript
+    Plug 'pangloss/vim-javascript'
+
+    " Scss
+    Plug 'tpope/vim-haml'
+
     " Colorschemes
     Plug 'tomasr/molokai'
+
+    " Linters
+    Plug 'dense-analysis/ale'
   call plug#end()
+
+"----- ALE LINTER -----"
+  let b:ale_linters = {'scss': ['stylelint'], 'javascript': ['eslint']}
+  let b:ale_fixers = {'scss': ['stylelint'], 'javascript': ['eslint'],}
+
+  let g:ale_sign_error = '✘'
+  let g:ale_sign_warning = '⚠'
+  let g:ale_fix_on_save = 1
+
+  highlight ALEErrorSign ctermbg=NONE ctermfg=red
+  highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
 "----- STATUS BAR-----"
   let g:airline_powerline_fonts = 1
@@ -34,6 +54,12 @@
 
   let g:airline_section_z = airline#section#create(['%3p%%: ', 'linenr', ':%3v'])
   let g:airline_section_warning = ''
+
+  "-----LINTER-----
+  let g:ale_linters = {'javascript': ['eslint'], 'clojure': ['joker'], 'css': ['stylelint']}
+  let g:ale_fixers = {'javascript': ['eslint'], 'clojure': ['joker'], 'css': ['stylelint']}
+  let g:ale_sign_column_always = 1
+  let g:airline#extensions#ale#enabled = 1
 
 "-----CLOJURE SPECIFICS-----"
 
