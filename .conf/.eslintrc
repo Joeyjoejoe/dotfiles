@@ -17,6 +17,7 @@
     },
     "parser": "babel-eslint",
     "rules": {
-      "space-in-parens": ["error", "never"]
+      "space-in-parens": ["error", "never"],
+      "max-len": [WARN, 200]
     }
 }

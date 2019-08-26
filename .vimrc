@@ -23,6 +23,9 @@
     " Scss
     Plug 'tpope/vim-haml'
 
+    " HTML
+    Plug 'othree/html5.vim'
+
     " Colorschemes
     Plug 'tomasr/molokai'
 
@@ -31,12 +34,15 @@
   call plug#end()
 
 "----- ALE LINTER -----"
-  let b:ale_linters = {'scss': ['stylelint'], 'javascript': ['eslint']}
-  let b:ale_fixers = {'scss': ['stylelint'], 'javascript': ['eslint'],}
+  let b:ale_linters = {'scss': ['stylelint'], 'javascript': ['eslint'], 'ruby': ['rubocop']}
+  let b:ale_fixers = {'scss': ['stylelint'], 'javascript': ['eslint'], 'ruby': ['rubocop']}
 
+  let g:ale_sign_column_always = 1
   let g:ale_sign_error = '✘'
   let g:ale_sign_warning = '⚠'
   let g:ale_fix_on_save = 1
+  let g:ale_linters_explicit = 1
+  let g:airline#extensions#ale#enabled = 1
 
   highlight ALEErrorSign ctermbg=NONE ctermfg=red
   highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
@@ -54,12 +60,6 @@
 
   let g:airline_section_z = airline#section#create(['%3p%%: ', 'linenr', ':%3v'])
   let g:airline_section_warning = ''
-
-  "-----LINTER-----
-  let g:ale_linters = {'javascript': ['eslint'], 'clojure': ['joker'], 'css': ['stylelint']}
-  let g:ale_fixers = {'javascript': ['eslint'], 'clojure': ['joker'], 'css': ['stylelint']}
-  let g:ale_sign_column_always = 1
-  let g:airline#extensions#ale#enabled = 1
 
 "-----CLOJURE SPECIFICS-----"
 
