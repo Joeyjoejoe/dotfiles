@@ -25,6 +25,7 @@
 
     " HTML
     Plug 'othree/html5.vim'
+    Plug 'vim-scripts/eruby.vim'
 
     " Colorschemes
     Plug 'tomasr/molokai'
@@ -60,6 +61,9 @@
 
   let g:airline_section_z = airline#section#create(['%3p%%: ', 'linenr', ':%3v'])
   let g:airline_section_warning = ''
+
+"-----VIM FUGITIVE-----"
+  nnoremap <silent> <c-@> :vertical Gstatus<CR>
 
 "-----CLOJURE SPECIFICS-----"
 
