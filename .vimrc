@@ -2,6 +2,8 @@
   call plug#begin('~/.vim/plugged')
     " Misc
     Plug 'roman/golden-ratio'
+    Plug 'scrooloose/nerdtree'
+    Plug 'tpope/vim-scriptease'
 
     " Status bar
     Plug 'bling/vim-airline'
@@ -19,6 +21,7 @@
 
     " Javascript
     Plug 'pangloss/vim-javascript'
+    Plug 'Joeyjoejoe/jsdoc.vim'
 
     " Scss
     Plug 'tpope/vim-haml'
@@ -62,8 +65,13 @@
   let g:airline_section_z = airline#section#create(['%3p%%: ', 'linenr', ':%3v'])
   let g:airline_section_warning = ''
 
+"-----JAVASCRIPT-----"
+  nnoremap jsd :<C-u>call JSDocAdd()<CR>
+
+
 "-----VIM FUGITIVE-----"
   nnoremap <silent> <c-@> :vertical Gstatus<CR>
+  nnoremap <silent> <Tab> :NERDTree<CR>
 
 "-----CLOJURE SPECIFICS-----"
 
