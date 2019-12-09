@@ -131,10 +131,10 @@
   set hlsearch
 
   "Indentation options
-  set expandtab
   set tabstop=2
   set shiftwidth=2
   set softtabstop=2
+  set expandtab
 
   "Set autoindents
   set cindent
