@@ -142,3 +142,8 @@
   "Backspace over anythings
   set backspace=indent,eol,start
 
+  "Display long lines on multiple lines
+  set wrap linebreak nolist
+
+  "Treat fils with .group extension as js
+  autocmd BufNewFile,BufRead *.group set syntax=js
