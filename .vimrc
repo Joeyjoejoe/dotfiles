@@ -2,8 +2,8 @@
   call plug#begin('~/.vim/plugged')
     " Misc
     Plug 'roman/golden-ratio'
-    Plug 'scrooloose/nerdtree'
     Plug 'tpope/vim-scriptease'
+    Plug 'tpope/vim-surround'
 
     " Status bar
     Plug 'bling/vim-airline'
