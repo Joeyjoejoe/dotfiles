@@ -10,7 +10,7 @@ function countdown(){
   tmux set -g status-interval 1
   date1=$((`date +%s` + $1));
   while [ "$date1" -ge `date +%s` ]; do
-    echo -e "$(date -u --date @$(($date1 - `date +%s`)) +%M:%S)⏲" >> $TMUX_BOX;
+    echo -e "$(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)⏲" >> $TMUX_BOX;
     sleep 0.1
   done
   tmux set -g status-interval 15

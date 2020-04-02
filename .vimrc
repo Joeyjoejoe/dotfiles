@@ -35,6 +35,12 @@
 
     " Linters
     Plug 'dense-analysis/ale'
+
+    " UML display
+    Plug 'tyru/open-browser.vim'
+    Plug 'aklt/plantuml-syntax'
+    Plug 'weirongxu/plantuml-previewer.vim'
+
   call plug#end()
 
 "----- ALE LINTER -----"
