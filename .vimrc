@@ -2,8 +2,9 @@
   call plug#begin('~/.vim/plugged')
     " Misc
     Plug 'roman/golden-ratio'
-    Plug 'tpope/vim-scriptease'
     Plug 'tpope/vim-surround'
+    "Plug 'vim-scripts/matchit.zip'
+    "Plug 'tpope/vim-ragtag'
 
     " Status bar
     Plug 'bling/vim-airline'
@@ -23,12 +24,14 @@
     Plug 'pangloss/vim-javascript'
     Plug 'Joeyjoejoe/jsdoc.vim'
 
+    " Ruby
+    Plug 'ecomba/vim-ruby-refactoring'
+
     " Scss
     Plug 'tpope/vim-haml'
 
     " HTML
     Plug 'othree/html5.vim'
-    Plug 'vim-scripts/eruby.vim'
 
     " Colorschemes
     Plug 'tomasr/molokai'
@@ -153,3 +156,5 @@
 
   "Treat fils with .group extension as js
   autocmd BufNewFile,BufRead *.group set syntax=js
+
+  runtime macros/matchit.vim

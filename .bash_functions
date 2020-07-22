@@ -16,3 +16,7 @@ function countdown(){
   tmux set -g status-interval 15
   echo " " >> $TMUX_BOX
 }
+
+function plantuml(){
+  java -jar ~/dotfiles/bin/plantuml.jar $1
+}
