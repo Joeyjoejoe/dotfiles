@@ -3,6 +3,7 @@
     " Misc
     Plug 'roman/golden-ratio'
     Plug 'tpope/vim-surround'
+    Plug 'ctrlpvim/ctrlp.vim'
     "Plug 'vim-scripts/matchit.zip'
     "Plug 'tpope/vim-ragtag'
 
@@ -97,6 +98,12 @@
   autocmd Syntax   clojure RainbowParenthesesLoadSquare
   autocmd Syntax   clojure RainbowParenthesesLoadBraces
 
+"----- CTRLP CONFIG -----"
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$|(node_modules|doc)$',
+  \ 'file': '\v\.(exe|so|dll)$'
+  \ }
 "-----UTILITY FUNCTIONS-----"
 
 	"Remove trailing spaces on save
