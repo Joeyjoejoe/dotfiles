@@ -4,6 +4,7 @@
     Plug 'roman/golden-ratio'
     Plug 'tpope/vim-surround'
     Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'majutsushi/tagbar'
     "Plug 'vim-scripts/matchit.zip'
     "Plug 'tpope/vim-ragtag'
 
@@ -25,9 +26,6 @@
     Plug 'pangloss/vim-javascript'
     Plug 'Joeyjoejoe/jsdoc.vim'
 
-    " Ruby
-    Plug 'ecomba/vim-ruby-refactoring'
-
     " Scss
     Plug 'tpope/vim-haml'
 
@@ -46,6 +44,9 @@
     Plug 'weirongxu/plantuml-previewer.vim'
 
   call plug#end()
+
+  " Tagbar shortcut: F8
+  nmap <F8> :TagbarToggle<CR>
 
 "----- ALE LINTER -----"
   let b:ale_linters = {'scss': ['stylelint'], 'css': ['stylelint'], 'javascript': ['eslint'], 'ruby': ['rubocop'], 'clojure': ['joker'], 'clojurescript': ['joker']}
@@ -142,6 +143,10 @@ let g:ctrlp_custom_ignore = {
   "Colorscheme
   let g:molokai_original = 1
   colorscheme molokai
+
+  "Comments & Strings font style
+  highlight Comment cterm=italic gui=italic
+  highlight String cterm=italic gui=italic
 
   "Highlight search resuts
   set hlsearch
