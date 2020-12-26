@@ -18,12 +18,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 
 # miscs
-alias install_drivers='bash /home/victor/dotfiles/scripts/install_nvidia_drivers.sh'
-alias weather='bash /home/victor/dotfiles/scripts/weather.sh'
-alias clopengl='tmuxinator start clopengl'
-alias bgcolors='~/dotfiles/scripts/bg-colors.sh'
-alias fgcolors='~/dotfiles/scripts/fg-colors.sh'
-alias colors='bgcolors;echo;fgcolors'
+alias colors='bg-colors;echo;fg-colors'
 alias pomodoro='countdown 1200 &'
 
 # enable color support of ls and also add handy aliases

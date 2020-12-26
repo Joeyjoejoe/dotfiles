@@ -211,8 +211,9 @@ if ! shopt -oq posix; then
 fi
 
 if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
+    PATH="$HOME/.local/bin:$HOME/dotfiles:$PATH"
 fi
+PATH="$HOME/dotfiles/bin:$PATH"
 
 export VISUAL=vim
 export EDITOR="$VISUAL"

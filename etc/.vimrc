@@ -49,8 +49,8 @@
   nmap <F8> :TagbarToggle<CR>
 
 "----- ALE LINTER -----"
-  let b:ale_linters = {'scss': ['stylelint'], 'css': ['stylelint'], 'javascript': ['eslint'], 'ruby': ['rubocop'], 'clojure': ['joker'], 'clojurescript': ['joker']}
-  let b:ale_fixers = {'scss': ['stylelint'], 'css': ['stylelint'], 'javascript': ['eslint'], 'ruby': ['rubocop']}
+  let b:ale_linters = {'scss': ['stylelint'], 'css': ['stylelint'], 'javascript': ['eslint'], 'ruby': ['rubocop'], 'clojure': ['joker'], 'clojurescript': ['joker'], 'sh': ['shellcheck']}
+  let b:ale_fixers = {'scss': ['stylelint'], 'css': ['stylelint'], 'javascript': ['eslint'], 'ruby': ['rubocop'], 'sh': ['shellcheck']}
 
   let g:ale_sign_column_always = 1
   let g:ale_sign_error = '✘'
