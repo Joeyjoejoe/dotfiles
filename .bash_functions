@@ -20,3 +20,17 @@ function countdown(){
 function plantuml(){
   java -jar ~/dotfiles/bin/plantuml.jar $1
 }
+
+# Search all files in TOPDIR for PATTERN and replace it with REPLACEMENT
+#
+#   ex: replace foo by bar in all files under app/example/ directory
+#       sr "foo" "bar" app/example
+function sr(){
+  PATTERN=$1
+  REPLACEMENT=$2
+  TOPDIR=$3
+
+  find $TOPDIR -type f -name '*' \
+    -exec grep -q "$PATTERN" {} \; \
+    -exec vim -c "%s/$PATTERN/$REPLACEMENT/gc" -c 'wq' {} \;
+}

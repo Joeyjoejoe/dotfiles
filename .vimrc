@@ -5,8 +5,6 @@
     Plug 'tpope/vim-surround'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'majutsushi/tagbar'
-    "Plug 'vim-scripts/matchit.zip'
-    "Plug 'tpope/vim-ragtag'
 
     " Status bar
     Plug 'bling/vim-airline'
@@ -45,12 +43,9 @@
 
   call plug#end()
 
-  " Tagbar shortcut: F8
-  nmap <F8> :TagbarToggle<CR>
-
 "----- ALE LINTER -----"
-  let b:ale_linters = {'scss': ['stylelint'], 'css': ['stylelint'], 'javascript': ['eslint'], 'ruby': ['rubocop'], 'clojure': ['joker'], 'clojurescript': ['joker']}
-  let b:ale_fixers = {'scss': ['stylelint'], 'css': ['stylelint'], 'javascript': ['eslint'], 'ruby': ['rubocop']}
+  let g:ale_linters = {'scss': ['stylelint'], 'css': ['stylelint'], 'javascript': ['eslint'], 'ruby': ['rubocop'], 'clojure': ['clj-kondo', 'joker'], 'clojurescript': ['clj-kondo', 'joker']}
+  let g:ale_fixers = {'scss': ['stylelint'], 'css': ['stylelint'], 'javascript': ['eslint'], 'ruby': ['rubocop'], 'clojure': ['remove_trailing_lines', 'trim_whitespace'], 'clojurescript': ['clj-kondo', 'joker']}
 
   let g:ale_sign_column_always = 1
   let g:ale_sign_error = '✘'
@@ -76,14 +71,6 @@
   let g:airline_section_z = airline#section#create(['%3p%%: ', 'linenr', ':%3v'])
   let g:airline_section_warning = ''
 
-"-----JAVASCRIPT-----"
-  nnoremap jsd :<C-u>call JSDocAdd()<CR>
-
-
-"-----VIM FUGITIVE-----"
-  nnoremap <silent> <c-@> :vertical Gstatus<CR>
-  nnoremap <silent> <Tab> :NERDTree<CR>
-
 "-----CLOJURE SPECIFICS-----"
 
   "Evaluate Clojure buffers on load
@@ -100,11 +87,13 @@
   autocmd Syntax   clojure RainbowParenthesesLoadBraces
 
 "----- CTRLP CONFIG -----"
+
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$|(node_modules|doc)$',
   \ 'file': '\v\.(exe|so|dll)$'
   \ }
+
 "-----UTILITY FUNCTIONS-----"
 
 	"Remove trailing spaces on save
@@ -116,6 +105,15 @@ let g:ctrlp_custom_ignore = {
 	endfunction
 
   autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+"-----KEYBOARD SHORTCUTS-----"
+
+  " F8 ~> Display tagbar
+  nmap <F8> :TagbarToggle<CR>
+  " jsd ~> Add doc to javascript function (Prompt on function name)
+  nnoremap jsd :<C-u>call JSDocAdd()<CR>
+  " ctrl+@ ~> Display git status
+  nnoremap <silent> <c-@> :vertical Gstatus<CR>
 
 "-----VIM DEFAULTS-----"
   set nocompatible

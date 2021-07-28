@@ -31,6 +31,7 @@
 	pretty = %Cred%h%Creset %C(magenta)%cd%Creset %C(blue)%an%Creset %C("#ff5900 normal italic bold")%d%Creset %C("#C9C9C9 normal dim")%s
 [alias]
 	s = status --porcelain
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [diff]
   submodule=log
 
