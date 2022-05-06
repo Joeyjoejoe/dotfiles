@@ -168,3 +168,5 @@ let g:ctrlp_custom_ignore = {
   autocmd BufNewFile,BufRead *.group set syntax=js
 
   runtime macros/matchit.vim
+
+  set backupcopy=yes
