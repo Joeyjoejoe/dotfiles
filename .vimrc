@@ -1,61 +1,75 @@
 "----- VIM PLUG-----"
   call plug#begin('~/.vim/plugged')
-    " Misc
-    Plug 'roman/golden-ratio'
-    Plug 'tpope/vim-surround'
-    Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'majutsushi/tagbar'
 
-    " Status bar
-    Plug 'bling/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
+  " Status bar
+  Plug 'bling/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
 
-    " Git
-    Plug 'tpope/vim-fugitive'
+  " Git
+  Plug 'tpope/vim-fugitive'
+  Plug 'airblade/vim-gitgutter' " might remove
 
-    " Clojure
-    Plug 'clojure-emacs/cider-nrepl'
-    Plug 'tpope/vim-fireplace'
-    Plug 'guns/vim-clojure-static'
-    Plug 'guns/vim-clojure-highlight'
-    Plug 'kien/rainbow_parentheses.vim'
+  " Colorschemes
+  Plug 'tomasr/molokai'
 
-    " Javascript
-    Plug 'pangloss/vim-javascript'
-    Plug 'Joeyjoejoe/jsdoc.vim'
+  " Autocomplete, lsp-server and linter
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-    " Scss
-    Plug 'tpope/vim-haml'
+  " Clojure
+  Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+  Plug 'guns/vim-clojure-highlight', { 'for': 'clojure' }
+  Plug 'junegunn/rainbow_parentheses.vim', { 'for': 'clojure' }
 
-    " HTML
-    Plug 'othree/html5.vim'
-
-    " Colorschemes
-    Plug 'tomasr/molokai'
-
-    " Linters
-    Plug 'dense-analysis/ale'
-
-    " UML display
-    Plug 'tyru/open-browser.vim'
-    Plug 'aklt/plantuml-syntax'
-    Plug 'weirongxu/plantuml-previewer.vim'
 
   call plug#end()
 
-"----- ALE LINTER -----"
-  let g:ale_linters = {'scss': ['stylelint'], 'css': ['stylelint'], 'javascript': ['eslint'], 'ruby': ['rubocop'], 'clojure': ['clj-kondo', 'joker'], 'clojurescript': ['clj-kondo', 'joker']}
-  let g:ale_fixers = {'scss': ['stylelint'], 'css': ['stylelint'], 'javascript': ['eslint'], 'ruby': ['rubocop'], 'clojure': ['remove_trailing_lines', 'trim_whitespace'], 'clojurescript': ['clj-kondo', 'joker']}
 
-  let g:ale_sign_column_always = 1
-  let g:ale_sign_error = '✘'
-  let g:ale_sign_warning = '⚠'
-  let g:ale_fix_on_save = 1
-  let g:ale_linters_explicit = 1
-  let g:airline#extensions#ale#enabled = 1
+"----- COC config -----"
 
-  highlight ALEErrorSign ctermbg=NONE ctermfg=red
-  highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+  " Highlight the symbol and its references when holding the cursor.
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+
+  " Use K to show documentation in preview window.
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+  function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+      execute 'h '.expand('<cword>')
+    elseif (coc#rpc#ready())
+      call CocActionAsync('doHover')
+    else
+      execute '!' . &keywordprg . " " . expand('<cword>')
+    endif
+  endfunction
+
+  " Use tab for trigger completion with characters ahead and navigate.
+  " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+  " other plugin before putting this into your config.
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
+
+  " Autocompletion - https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources
+  inoremap <silent><expr> <Tab>
+        \ coc#pum#visible() ? coc#pum#next(1) :
+        \ CheckBackspace() ? "\<Tab>" :
+        \ coc#refresh()
+  inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+
+  " Some servers have issues with backup files, see coc.nvim#649.
+  set nobackup
+  set nowritebackup
+
+  " Give more space for displaying messages.
+  set cmdheight=2
+
 
 "----- STATUS BAR-----"
   let g:airline_powerline_fonts = 1
@@ -71,29 +85,6 @@
   let g:airline_section_z = airline#section#create(['%3p%%: ', 'linenr', ':%3v'])
   let g:airline_section_warning = ''
 
-"-----CLOJURE SPECIFICS-----"
-
-  "Evaluate Clojure buffers on load
-  autocmd BufRead *.clj try | silent! Require | catch /^Fireplace/ | endtry
-  "Compatibility fix
-  autocmd Syntax clojure EnableSyntaxExtension
-
-  "Rainbow parenthesis
-  let g:rbpt_max = 16
-  let g:rbpt_loadcmd_toggle = 0
-  autocmd VimEnter *       RainbowParenthesesToggle
-  autocmd Syntax   clojure RainbowParenthesesLoadRound
-  autocmd Syntax   clojure RainbowParenthesesLoadSquare
-  autocmd Syntax   clojure RainbowParenthesesLoadBraces
-
-"----- CTRLP CONFIG -----"
-
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$|(node_modules|doc)$',
-  \ 'file': '\v\.(exe|so|dll)$'
-  \ }
-
 "-----UTILITY FUNCTIONS-----"
 
 	"Remove trailing spaces on save
@@ -106,12 +97,9 @@ let g:ctrlp_custom_ignore = {
 
   autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
+
 "-----KEYBOARD SHORTCUTS-----"
 
-  " F8 ~> Display tagbar
-  nmap <F8> :TagbarToggle<CR>
-  " jsd ~> Add doc to javascript function (Prompt on function name)
-  nnoremap jsd :<C-u>call JSDocAdd()<CR>
   " ctrl+@ ~> Display git status
   nnoremap <silent> <c-@> :vertical Gstatus<CR>
 
@@ -120,13 +108,18 @@ let g:ctrlp_custom_ignore = {
   syntax on
   filetype plugin indent on
 
+  set encoding=utf-8
+
   ".swp files directory
   set directory=$HOME/.vim/.swapfiles//
 
   "Enable mouse
   set mouse=a
 
-  set guifont=Ubuntu\ Mono\ 13
+  "Vim update delay
+  set updatetime=100
+
+  set guifont=Fantasque\ Sans\ Mono
 
   "256 colors
   set t_Co=256
