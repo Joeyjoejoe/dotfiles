@@ -1,0 +1,11 @@
+{
+  "extends": "/usr/lib/node_modules/stylelint-config-sass-guidelines",
+  "rules": {
+    "max-nesting-depth": 3,
+    "selector-no-qualifying-type": [true, {
+      "ignore": ["attributes"]
+    }],
+    "selector-class-pattern": ["^[a-z0-9\\-]+$", {"resolveNestedSelectors": true}],
+    "selector-max-id": 1
+  }
+}

@@ -1,0 +1,37 @@
+[user]
+	email = vikthor.d@gmail.com
+	name = victor Defontaine
+[color]
+	ui = true
+	branch = auto
+	diff = auto
+	status = auto
+  showbranch = auto
+[color "branch"]
+  current = "#00af00 normal bold italic"
+  local = "#d7500f normal italic"
+  remote = "#d70000 normal italic"
+[color "diff"]
+  context = "#C9C9C9 normal dim"
+  meta = "#b900ff normal dim bold"
+	frag = "#ff5900 normal italic bold"
+	old = "#ff1b00 normal bold"
+  new = green bold
+[color "status"]
+	header = "#C9C9C9 normal dim"
+	added = "yellow normal strike"
+	updated = "green normal italic"
+	changed = "#ff5900 normal italic"
+	untracked = "#ff1b00 normal italic"
+	nobranch = "white normal bold"
+	branch = "#b900ff normal bold"
+[log]
+	date = short
+[format]
+	pretty = %Cred%h%Creset %C(magenta)%cd%Creset %C(blue)%an%Creset %C("#ff5900 normal italic bold")%d%Creset %C("#C9C9C9 normal dim")%s
+[alias]
+	s = status --porcelain
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+[diff]
+  submodule=log
+
