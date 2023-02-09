@@ -1,0 +1,6 @@
+sudo apt install fonts-symbola
+
+cp ~/dotfiles/resources/fonts/*.otf ~/.local/share/fonts
+cp ~/dotfiles/resources/fonts/*.ttf ~/.local/share/fonts
+
+echo "Fonts installed - recommanded terminal font size: 13px"
