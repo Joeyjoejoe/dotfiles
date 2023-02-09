@@ -1,2 +1,4 @@
-.vim/plugged/*
-.vim/.netrwhist
+etc/.vim/plugged/*
+etc/.vim/.netrwhist
+etc/.vim/.swapfiles/
+
