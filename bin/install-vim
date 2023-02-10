@@ -1,5 +1,5 @@
-# install nodejs
-sudo apt-get install -y nodejs
+# install latest nodejs
+curl -sL install-node.vercel.app/lts | bash
 
 # clojure-lsp
 sudo bash < <(curl -s https://raw.githubusercontent.com/clojure-lsp/clojure-lsp/master/install)
