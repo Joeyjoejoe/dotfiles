@@ -151,6 +151,7 @@ inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 
   "Treat fils with .group extension as js
   autocmd BufNewFile,BufRead *.group set syntax=js
+  autocmd BufWritePre * :%s/\s\+$//e
 
   runtime macros/matchit.vim
 
